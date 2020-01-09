@@ -1,10 +1,10 @@
-let socketIO = require('socket.io');
-let globalFunction = require('./globalFunction');
-let processFunction = require('./processFunction');
+const socketIO = require('socket.io');
+const globalFunc = require('./global-function');
+const processController = require('./process-controller');
 
 function startServer(port, password, pythonBinPath, args) {
 
-    globalFunction.showMessage(`Starting socket server on port ${port}`);
+    console.log(`${globalFunc.getTime()} : Starting socket server on port ${port}`);
 
     socketIO.listen(port).on('connection', (socket) => {
 
@@ -22,20 +22,20 @@ function startServer(port, password, pythonBinPath, args) {
                 // run inference
                 if(request.command === 'run') {
 
-                    globalFunction.showMessage('Job Start '.padEnd(13) + request.code);
+                    console.log(`${globalFunc.getTime()} : ${'Job Start '.padEnd(13)}${request.code}`);
 
                     socket.emit('response', {'command':'job', 'state':'invalid'});
 
-                    processFunction.updateCurrent(request.code);
+                    processController.updateCurrent(request.code);
 
-                    processFunction.writeProcess(JSON.stringify(request.src));
+                    processController.writeProcess(JSON.stringify(request.src));
 
                     // spawn process
                 } else if(request.command === 'spawn') {
 
                     socket.emit('response', {'command':'job', 'state':'invalid'});
 
-                    processFunction.spawnProcess(socket, pythonBinPath, args);
+                    processController.spawnProcess(socket, pythonBinPath, args);
 
                 }
 
@@ -55,9 +55,9 @@ async function reportStatus(socket) {
 
             socket.emit('response', {'command':'report', 'status':'OK'});
 
-            globalFunction.showMessage('Reported to master');
+            console.log(`${globalFunc.getTime()} : Reported to master`);
 
-            await globalFunction.delay(1000 * 60); // 1 minute
+            await globalFunc.delay(1000 * 60); // 1 minute
 
         } else break; // stop when socket disconnected
 

@@ -1,6 +1,6 @@
-let crypto = require('crypto');
-let express = require('express');
-let globalVar = require('../../global');
+const crypto = require('crypto');
+const express = require('express');
+const globalModel = require('./global-model');
 
 let counter = 1;
 
@@ -15,7 +15,7 @@ router.post('/', (request, response) => {
     if(inputTask === undefined) response.send('Bad Request');
 
     let code = crypto.createHash('sha512').update((counter++) + "").digest('hex');
-    globalVar.requestQueue.push([code, inputTask, response]);
+    globalModel.requestQueue.push([code, inputTask, response]);
 
 });
 
