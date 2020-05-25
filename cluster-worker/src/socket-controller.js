@@ -1,10 +1,10 @@
 const socketIO = require('socket.io');
-const globalFunc = require('./global-function');
+const utility = require('./utility');
 const processController = require('./process-controller');
 
 function startServer(port, password, pythonBinPath, args) {
 
-    console.log(`${globalFunc.getTime()} : Starting socket server on port ${port}`);
+    console.log(`${utility.getTime()} : Starting socket server on port ${port}`);
 
     socketIO.listen(port).on('connection', (socket) => {
 
@@ -22,7 +22,7 @@ function startServer(port, password, pythonBinPath, args) {
                 // run inference
                 if(request.command === 'run') {
 
-                    console.log(`${globalFunc.getTime()} : ${'Job Start '.padEnd(13)}${request.code}`);
+                    console.log(`${utility.getTime()} : ${'Job Start '.padEnd(13)}${request.code}`);
 
                     socket.emit('response', {'command':'job', 'state':'invalid'});
 
@@ -55,9 +55,9 @@ async function reportStatus(socket) {
 
             socket.emit('response', {'command':'report', 'status':'OK'});
 
-            console.log(`${globalFunc.getTime()} : Reported to master`);
+            console.log(`${utility.getTime()} : Reported to master`);
 
-            await globalFunc.delay(1000 * 60); // 1 minute
+            await utility.delay(1000 * 60); // 1 minute
 
         } else break; // stop when socket disconnected
 
@@ -66,7 +66,5 @@ async function reportStatus(socket) {
 }
 
 module.exports = {
-
-    startServer : startServer
-
+    startServer
 };

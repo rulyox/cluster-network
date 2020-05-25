@@ -13,8 +13,6 @@ let delay = (ms) => {
 };
 
 module.exports = {
-
-    getTime : getTime,
-    delay : delay
-
+    getTime,
+    delay
 };

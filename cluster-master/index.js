@@ -1,15 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const minimist = require('minimist');
-const taskRouter = require('./module/task-router');
-const globalFunc = require('./module/global-function');
-const taskController = require('./module/task-controller');
+const taskRouter = require('./src/task/task-router');
+const taskController = require('./src/task/task-controller');
+const utility = require('./src/utility');
 
 // connect to worker sockets
 taskController.initSocket();
 
 // asynchronous infinite loop
-taskController.processQueue().then();
+taskController.processQueue();
 
 let arg = minimist(process.argv.slice(2));
 let port = arg.port;
@@ -23,4 +23,4 @@ app.get('/', (request, response) => response.send('Cluster Network Master'));
 // redirect
 app.get('*', (request, response) => response.redirect('/'));
 
-app.listen(port, () => console.log(`${globalFunc.getTime()} : Listening on port ${port}`));
+app.listen(port, () => console.log(`${utility.getTime()} : Listening on port ${port}`));

@@ -1,5 +1,5 @@
 const childProcess = require('child_process');
-const globalFunc = require('./global-function');
+const utility = require('./utility');
 
 let pythonProcess;
 let currentCode;
@@ -13,16 +13,16 @@ function spawnProcess(socket, pythonBinPath, args) {
 
         pythonProcess.kill('SIGKILL');
 
-        console.log(`${globalFunc.getTime()} : Killed existing process`);
+        console.log(`${utility.getTime()} : Killed existing process`);
 
     } catch (e) {
 
-        console.log(`${globalFunc.getTime()} : No process to kill`);
+        console.log(`${utility.getTime()} : No process to kill`);
 
     }
 
     // spawn new process & initialize
-    console.log(`${globalFunc.getTime()} : Process Spawn`);
+    console.log(`${utility.getTime()} : Process Spawn`);
 
     pythonProcess = childProcess.spawn(pythonBinPath, args);
 
@@ -33,7 +33,7 @@ function spawnProcess(socket, pythonBinPath, args) {
 
         socket.emit('response', {'command':'result', 'code':currentCode, 'result':`${data.toString()}`});
 
-        console.log(`${globalFunc.getTime()} : ${'Job Done '.padEnd(13)}${currentCode}`);
+        console.log(`${utility.getTime()} : ${'Job Done '.padEnd(13)}${currentCode}`);
 
     });
 
@@ -50,7 +50,7 @@ function spawnProcess(socket, pythonBinPath, args) {
 
         socket.emit('response', {'command':'report', 'status':'ERROR'});
 
-        console.log(`OPERATOR ERROR : ${globalFunc.getTime()}\n${errorMsg}`);
+        console.log(`OPERATOR ERROR : ${utility.getTime()}\n${errorMsg}`);
 
     });
 
@@ -70,9 +70,7 @@ function updateCurrent(code) {
 }
 
 module.exports = {
-
-    spawnProcess : spawnProcess,
-    writeProcess : writeProcess,
-    updateCurrent : updateCurrent
-
+    spawnProcess,
+    writeProcess,
+    updateCurrent
 };

@@ -1,12 +1,10 @@
 {
   "name": "cluster-master",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js --port 8888"
   },
-  "keywords": [],
   "author": "rulyox",
   "license": "MIT",
   "dependencies": {

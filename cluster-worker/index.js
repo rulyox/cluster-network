@@ -1,5 +1,5 @@
 let argv = require('minimist')(process.argv.slice(2));
-const socketController = require('./module/socket-controller');
+const socketController = require('./src/socket-controller');
 
 let port = parseInt(argv.port);
 let password = argv.password;
