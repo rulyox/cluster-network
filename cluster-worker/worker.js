@@ -1,5 +1,5 @@
 let argv = require('minimist')(process.argv.slice(2));
-const socketController = require('./src/socket-controller');
+const socketServer = require('./src/socket-server');
 
 let port = parseInt(argv.port);
 let password = argv.password;
@@ -10,4 +10,4 @@ let args = [
     pythonExecutable
 ];
 
-socketController.startServer(port, password, pythonBinPath, args);
+socketServer.startServer(port, password, pythonBinPath, args);

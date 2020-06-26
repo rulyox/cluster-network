@@ -1,22 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const minimist = require('minimist');
-const taskRouter = require('./src/task/task-router');
-const taskController = require('./src/task/task-controller');
+const router = require('./src/router');
+const controller = require('./src/controller');
 const utility = require('./src/utility');
 
 // connect to worker sockets
-taskController.initSocket();
+controller.initSocket();
 
 // asynchronous infinite loop
-taskController.processQueue();
+controller.processQueue();
 
 let arg = minimist(process.argv.slice(2));
 let port = arg.port;
 
 let app = express();
 app.use(bodyParser.json());
-app.use('/task', taskRouter);
+app.use('/task', router);
 
 app.get('/', (request, response) => response.send('Cluster Network Master'));
 

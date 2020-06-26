@@ -1,4 +1,6 @@
-# Cluster Network 
+# Cluster Network V1
+
+#### This project is deprecated and will be replaced by [Cluster Network V2](https://github.com/rulyox/cluster-network-v2).
 
 Simple Node.js implementation of baseline cluster network using Master & Worker architecture.
 
@@ -69,7 +71,3 @@ Operator is the process which do the actual calculations. (ex. python)
 7. When Worker receives a task, change state to 'invalid'. After Operator finishes the task, send result to Master and change state to 'valid'.
 8. When Master receives a result from a Worker, send response to client.
 9. When Operator makes an error, Controller restarts the process.
-
-## TODO
-* Worker reports every minute.
-* If Operator fails a task, report to Master. 

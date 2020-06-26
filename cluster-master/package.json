@@ -1,9 +1,9 @@
 {
   "name": "cluster-master",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "master.js",
   "scripts": {
-    "start": "node index.js --port 8888"
+    "start": "node master.js --port 8888"
   },
   "author": "rulyox",
   "license": "MIT",

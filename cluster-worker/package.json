@@ -1,9 +1,9 @@
 {
   "name": "cluster-worker",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "worker.js",
   "scripts": {
-    "start": "node index.js --port 8801 --password \"a1b2c3d4\" --python_bin \"/usr/bin/python3\" --python_exe \"./python/sample.py\""
+    "start": "node worker.js --port 8801 --password \\\"a1b2c3d4\\\" --python_bin \\\"/usr/bin/python3\\\" --python_exe \\\"./python/sample.py\\\""
   },
   "author": "rulyox",
   "license": "MIT",

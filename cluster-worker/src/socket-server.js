@@ -1,6 +1,6 @@
 const socketIO = require('socket.io');
-const utility = require('./utility');
 const processController = require('./process-controller');
+const utility = require('./utility');
 
 function startServer(port, password, pythonBinPath, args) {
 

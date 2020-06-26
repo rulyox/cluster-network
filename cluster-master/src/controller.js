@@ -1,7 +1,7 @@
 const socketClient = require('socket.io-client');
-const data = require('../data');
-const utility = require('../utility');
-const workerConfig = require('../../config/worker.json');
+const data = require('./data');
+const utility = require('./utility');
+const workerConfig = require('../config/worker.json');
 
 let initSocket = () => {
 
